@@ -427,3 +427,26 @@ STRUCT!{struct WSAPOLLFD {
 pub type PWSAPOLLFD = *mut WSAPOLLFD;
 pub type LPWSAPOLLFD = *mut WSAPOLLFD;
 pub const FIONBIO: ::c_ulong = 0x8004667e;
+
+pub const LUP_CONTAINERS: DWORD = 0x0002;
+pub const LUP_RETURN_NAME: DWORD = 0x0010;
+pub const LUP_RETURN_ADDR: DWORD = 0x0100;
+
+//bthdef.h
+pub type BTH_ADDR = ULONGLONG;
+
+//ws2bth.h
+pub const NS_BTH: DWORD = 16;
+
+pub const BTHPROTO_RFCOMM: ::c_int = 0x0003;
+pub const BTHPROTO_L2CAP: ::c_int = 0x0100;
+
+STRUCT!{SOCKADDR_BTH {
+    addressFamily: USHORT,  // Always AF_BTH
+    btAddr: BTH_ADDR,         // Bluetooth device address
+    serviceClassId: GUID, // [OPTIONAL] system will query SDP for port
+    port: ULONG,           // RFCOMM channel or L2CAP PSM
+}}
+pub const BT_PORT_ANY: ULONG = -1 as LONG as ULONG;
+
+DEFINE_GUID!(RFCOMM_PROTOCOL_UUID, 0x00000003, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB);
